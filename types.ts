@@ -4,6 +4,11 @@ export interface ResponseType {
     Promoted: [];
     Data: NewsData[];
 }
+export interface NewsFormat {
+    title: string;
+    creationTime: string;
+    url: string;
+}
 interface NewsData {
     id: string,
     guid: string,
