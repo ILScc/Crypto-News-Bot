@@ -23,7 +23,8 @@ interface NewsData {
     downvotes : string,
     lang : string,
     source_info : {
-    name : string,
-    lang : string,
-    img : string
-}}
+        name : string,
+        lang : string,
+        img : string,
+    }
+}

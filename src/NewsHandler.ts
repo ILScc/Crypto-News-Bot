@@ -19,7 +19,7 @@ export async function getNewsData(){
                 url: new URL(rawUrl).href
             };
         });
-        return neededNewsData.slice(0,5);
+        return neededNewsData;
     }catch(error){
         console.error(error);
     }
