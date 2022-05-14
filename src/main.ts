@@ -2,14 +2,18 @@ import type { NewsFormat } from './types';
 import { getNewsData } from './NewsHandler';
 import { Bot } from 'grammy';
 import { Menu } from '@grammyjs/menu';
+import { BOT_API_KEY } from '../secrets';
 
-const BOT_TOKEN = '5360109659:AAGwqfPOimT-bAHiFnFDhXhd5kFR-rE_L20';
-
-const bot = new Bot(BOT_TOKEN);
+const bot = new Bot(BOT_API_KEY);
 let news: NewsFormat[] = [];
 let lastShownNewsIdx = 0;
-
-const menu = new Menu('my-menu-identifier')
+bot.api.setMyCommands([
+    { command: 'news', description: 'Load news' },
+    { command: 'help', description: 'Show help text' },
+    { command: 'settings', description: 'Open settings' },
+    { command: 'find', description: 'Find article by name' }, // TODO: реализовать добавление
+]);
+const menu = new Menu('mainMenu')
     .text('List all news titles', async (ctx) => {
         const titles: string[] = [];
         for (const { title } of news) {
@@ -26,14 +30,14 @@ const menu = new Menu('my-menu-identifier')
     });   
 
 bot.use(menu);
-bot.command('getnews', async (ctx) => {
+bot.command('news', async (ctx) => {
     news = (await getNewsData()) || [];
     await ctx.reply(`I received ${news.length} news`);
     await ctx.reply('You have options to proceed', { reply_markup: menu });
 });
-bot.command('menu', async (ctx) => {
-    await ctx.reply('Here is your menu', { reply_markup: menu });
-});
+// bot.command('menu', async (ctx) => {
+//     await ctx.reply('Here is your menu', { reply_markup: menu });
+// });
 bot.start();
 bot.catch((error) => {
     console.dir(error);
