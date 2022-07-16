@@ -4,13 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "export DEBUG='grammy*'; ts-node src/main.ts",
+    "start": "ts-node src/main.ts && export DEBUG='grammy*'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.18.0",
     "@typescript-eslint/parser": "^5.18.0",
     "eslint": "^8.13.0",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@grammyjs/menu": "^1.1.1",
+    "dotenv": "^16.0.1",
     "grammy": "^1.8.2",
     "grammy-inline-menu": "^7.0.2",
     "undici": "^5.0.0"
